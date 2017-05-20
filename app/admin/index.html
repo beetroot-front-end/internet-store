@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="../public/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../public/css/jquery.growl.css"/>
+    <link rel="stylesheet" href="css/admin.css"/>
+</head>
+<body>
+<header>
+    SUPER ADMIN PANEL
+</header>
+<div class="container-fluid">
+    <div class="row">
+        <nav class="col-md-3">
+            <ul class="list-unstyled">
+                <li>
+                    <a href="#">Goods</a>
+                </li>
+                <li>
+                    <a href="#">Some route</a>
+                </li>
+                <li>
+                    <a href="#">Some route</a>
+                </li>
+            </ul>
+        </nav>
+        <main class="col-md-9">
+            <div class="row">
+                <h2>Add item</h2>
+                <form action="" class="col-xs-12" id="add-goods">
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input type="text" class="form-control" id="title" placeholder="Title" name="title">
+                    </div>
+                    <div class="form-group">
+                        <label for="price">Price $</label>
+                        <input type="number" class="form-control" id="price" placeholder="Number" name="price">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea class="form-control" id="description" cols="30" rows="10" name="description"></textarea>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="is_hidden"> is hidden
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </form>
+            </div>
+            <hr/>
+            <h2>Goods list</h2>
+            <div class="row">
+                <table class="table table-hover col-xs-12">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Title</th>
+                        <th>Price</th>
+                        <th>Is Hidden</th>
+                        <th>Description</th>
+                        <th>Control</th>
+                    </tr>
+                    </thead>
+                    <tbody id="goods-list">
+                    <tr>
+                        <th scope="row">  </th>
+                        <td>Шорты 1</td>
+                        <td>100</td>
+                        <td><input type="checkbox"/> </td>
+                        <td> <p style="width: 200px">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus neque obcaecati possimus vitae! Aperiam at consectetur delectus deserunt dolorum est eveniet exercitationem, inventore iste laboriosam libero neque placeat unde voluptatibus.
+                        </p> </td>
+                        <td>
+                            <button class="btn btn-danger text-uppercase"> remove </button>
+                            <button class="btn btn-primary text-uppercase"> edit </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+</div>
+<footer>
+
+</footer>
+<!-- libs -->
+<script src="../public/js/jquery.min.js"></script>
+<script src="../public/js/bootstrap.min.js"></script>
+<script src="../public/js/jquery.growl.js"></script>
+<!-- modules -->
+<script src="js/goods.js"></script>
+</body>
+</html>
