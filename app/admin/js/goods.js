@@ -1,6 +1,3 @@
-/**
- * Created by HP-ProBook on 20.05.2017.
- */
 let goods = (function(){
     let new_item = {};
 
