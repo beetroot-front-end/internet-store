@@ -4,6 +4,7 @@ let store = Array.from({length: 50}, ()=>({
     quantity: 5000,
     price: 49.99,
     sale: 0,
+    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam culpa reprehenderit, cum laborum ipsa dolores sunt enim dignissimos dolore sed libero maiores fugiat? Consectetur necessitatibus nam, velit, repellat atque dolorum.',
     label: 'default',
     title: 'QWertyuiop',
     img_min: 'img/shorts.jpg',
