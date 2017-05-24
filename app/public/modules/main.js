@@ -1,7 +1,7 @@
-let store = Array.from({length: 50}, ()=>({
+let store = Array.from({length: 5}, ()=>({
     id: 123456,
     dateAdd: '20.06.17',
-    quantity: 5000,
+    quantity: 1,
     price: 49.99,
     sale: 0,
     description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam culpa reprehenderit, cum laborum ipsa dolores sunt enim dignissimos dolore sed libero maiores fugiat? Consectetur necessitatibus nam, velit, repellat atque dolorum.',
@@ -11,10 +11,21 @@ let store = Array.from({length: 50}, ()=>({
     img: 'img/shorts.jpg'
 }));
 
-let preloader = $('.main_preloader');
+store.push(Object.assign({}, store[0], {
+    quantity: 110,
+    price: 5000,
+    title: 'Lol kek',
+    img: 'img/logo.png'
+}));
+
+console.log(store);
+
+let preloader = $('.main_preloader'),
+    goods_list = $('.catalog_items-list'),
+    addToCartBtn = $('#add-to-cart');
 
 function appendToList(store = [], q){
-    $('.catalog_items-list').createGoodsTemplate(store, {
+    goods_list.createGoodsTemplate(store, {
         itemsOnPage: q
     }, ()=>{
         preloader.do({
@@ -22,6 +33,26 @@ function appendToList(store = [], q){
             time: 1500
         })
     });
+}
+
+
+
+function addToCart(event){
+    let currentItemIndex = $(this).index();
+    let currentItem = store[currentItemIndex];
+    let modal = $('#cart');
+
+    let keys = Object.keys(currentItem);
+    keys.forEach(key => {
+        let field = modal.find(`[data-value="${key}"]`);
+        if (field.attr('type')) {
+            field.val(currentItem[key])
+        } else if (field.is('img')) {
+            field.attr('src', currentItem[key]);    
+        } else field.text(currentItem[key]);    
+    });
+    addToCartBtn.attr('data-index', currentItemIndex);
+    modal.modal();
 }
 
 function getGoods(event){
@@ -53,4 +84,12 @@ let menu = $('.catalog_nav');
 
 menu.on('click', 'a', getGoods);
 
-appendToList(store, 5);
+goods_list.on('click', 'li', addToCart);
+
+addToCartBtn.on('click', function(){
+    let currenItem = $(this).attr('data-index');
+    cart.updateCounter(store[currenItem]);
+    $('#cart').modal('hide');
+});
+
+appendToList(store);
