@@ -5,21 +5,34 @@ let goods = (function(){
         goods_list = $('#goods-list');
 
     function parseForm(form){
-        let fields = form.find(' input, textarea '),
+        let fields = form.find(' input, textarea, select '),
             data = {};
 
         fields.each((index, element) => {
             let item = $(element);
-            data[item.attr('name')] = item.attr('type') === 'checkbox' ?
-                                        item.prop('checked') :
-                                        item.val().trim();
+            if (item.attr('type') === 'checkbox') {
+                data[item.attr('name')] = item.prop('checked');
+            } else {
+                data[item.attr('name')] = item.val().trim();
+            }
         });
 
         return data;
     }
 
+    function getGoods(){
+        $.ajax({
+            method: 'GET',
+            url: 'https://store-maks1mp.c9users.io/api/goods?collection=shorts',
+            success: function(response){
+                if (response.status) {
+                    response.data.forEach(addToList);
+                }
+            }
+        })
+    }
+
     function addToList(data){
-        // ajax request
         goods_list.prepend( `<tr>
                                 <th scope="row">  </th>
                                 <td> ${data.title} </td>
@@ -56,17 +69,24 @@ let goods = (function(){
 
     form.on('submit', function (e) {
        e.preventDefault();
-       let form_data = $.extend(parseForm($(this)), { id: Date.now() });
-
-       if ( hasEmptyField(form_data) ) {
-           $.growl.error({ message: "Form validation error!" });
-       } else {
-           addToList(form_data);
-           $.growl.notice({ message: "Added new item to list" });
-           clearFields($(this));
-       }
+       let form_data = $.extend(parseForm($(this)), { dateAdd: Date.now() });
+       $.ajax({
+         data: JSON.stringify({
+            collection: 'shorts', 
+            body: form_data}),
+         method: 'POST',
+         url: 'https://store-maks1mp.c9users.io/api/goods/add',
+         contentType: 'application/json',
+         success: function(response){
+            if (response.status) {
+                goods_list.html('');
+                getGoods();
+            }
+         }
+       });
     });
 
+    getGoods();
 
     return {  }
 }());

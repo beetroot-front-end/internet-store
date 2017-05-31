@@ -1,7 +1,5 @@
 let store = Array.from({length: 5}, ()=>({
-    id: 123456,
-    dateAdd: '20.06.17',
-    quantity: 1,
+    dateAdd: 12562137821739,
     price: 49.99,
     sale: 0,
     description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam culpa reprehenderit, cum laborum ipsa dolores sunt enim dignissimos dolore sed libero maiores fugiat? Consectetur necessitatibus nam, velit, repellat atque dolorum.',
