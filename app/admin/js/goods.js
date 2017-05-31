@@ -23,7 +23,7 @@ let goods = (function(){
     function getGoods(){
         $.ajax({
             method: 'GET',
-            url: 'https://store-maks1mp.c9users.io/api/goods?collection=shorts',
+            url: 'https://store-maks1mp.c9users.io/api/goods?collection=sweaters',
             success: function(response){
                 if (response.status) {
                     response.data.forEach(addToList);
@@ -72,7 +72,7 @@ let goods = (function(){
        let form_data = $.extend(parseForm($(this)), { dateAdd: Date.now() });
        $.ajax({
          data: JSON.stringify({
-            collection: 'shorts', 
+            collection: 'sweaters', 
             body: form_data}),
          method: 'POST',
          url: 'https://store-maks1mp.c9users.io/api/goods/add',
