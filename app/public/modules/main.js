@@ -1,22 +1,4 @@
-let store = Array.from({length: 5}, ()=>({
-    dateAdd: 12562137821739,
-    price: 49.99,
-    sale: 0,
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam culpa reprehenderit, cum laborum ipsa dolores sunt enim dignissimos dolore sed libero maiores fugiat? Consectetur necessitatibus nam, velit, repellat atque dolorum.',
-    label: 'default',
-    title: 'QWertyuiop',
-    img_min: 'img/shorts.jpg',
-    img: 'img/shorts.jpg'
-}));
-
-store.push(Object.assign({}, store[0], {
-    quantity: 110,
-    price: 5000,
-    title: 'Lol kek',
-    img: 'img/logo.png'
-}));
-
-console.log(store);
+var store = [];
 
 let preloader = $('.main_preloader'),
     goods_list = $('.catalog_items-list'),
@@ -63,19 +45,9 @@ function getGoods(event){
         hash = element.attr('href');
 
     window.location.hash = hash;
-    // AJAX REQUEST
-    // $.get(`http://localhost:3001/goods?category=${hash}`)
-    appendToList(Array.from({length: 1}, ()=>({
-        id: 123456,
-        dateAdd: '20.06.17',
-        quantity: 5000,
-        price: 29.99,
-        sale: 0,
-        label: 'default',
-        title: 'askdhsaldjasdj',
-        img_min: 'img/shorts.jpg',
-        img: 'img/shorts.jpg'
-    })));
+    console.log(hash);
+    getData(hash.slice(1));
+
 }
 
 let menu = $('.catalog_nav');
@@ -90,4 +62,19 @@ addToCartBtn.on('click', function(){
     $('#cart').modal('hide');
 });
 
-appendToList(store);
+
+function getData(hash){
+    hash = hash || window.location.hash.slice(1) || 'shorts';
+    $.ajax({
+        method: 'GET',
+        url: `https://store-maks1mp.c9users.io/api/goods?collection=${hash}`,
+        success: function(response){
+            if (response.status) {
+                store = response.data;
+                appendToList(response.data);
+            }
+        }
+    })
+}
+
+getData();

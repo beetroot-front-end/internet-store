@@ -5,11 +5,11 @@ $.fn.createGoodsTemplate = function(data, config, fn){
     }, config);
     
     let toHtml = (item) => {
-        let { label, id ,title, price, img } = item;
+        let { label, _id ,title, price, img } = item;
         
         return ` 
-            <li class="catalog_item ${label}" data-id="${id}">
-                <img src="${img}" alt="${title}" class="catalog_item-img">
+            <li class="catalog_item ${label}" data-id="${_id}">
+                <img src="${img}" alt="${title}" class="img-responsive catalog_item-img">
                 <p class="catalog_item-name">
                     ${title}
                 </p>
